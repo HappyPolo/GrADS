@@ -1,0 +1,11 @@
+'reinit'
+'enable print F:\week4.3.16303003.gmf'
+'sdfopen F:\data\grads\uwnd.levs.monthly.ERAINT.nc'
+'set lon 0 180'
+'set lat 0 40'
+'set lev 925'
+'set t 7'
+'set gxout contour'
+******************** 
+'set mproj nps'
+'

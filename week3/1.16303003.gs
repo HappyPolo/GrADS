@@ -1,0 +1,10 @@
+'reinit'
+'enable print F:\scripts\grads\week3\1.16303003.gmf'
+'sdfopen F:\data\grads\uwnd.levs.monthly.ERAINT.nc'
+'d u'
+'print'
+'printim F:\scripts\grads\week3\1.16303003.png x1000 y800 white'
+'c'
+'disable print'
+'quit'
+*

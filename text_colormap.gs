@@ -1,0 +1,15 @@
+'reinit'
+'sdfopen F:\data\sysu.nc'
+'enable print F:\scripts\grads\sysu.gmf'
+'set mpdraw off'
+'set gxout shaded'
+*'set grads off'
+'set grid off'
+* Example 1:
+'colormap BlueDarkRed18'
+'d band1'
+'print'
+'c'
+'disable print'
+'quit'
+*
