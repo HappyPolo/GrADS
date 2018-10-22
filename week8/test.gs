@@ -1,0 +1,6 @@
+'reinit'
+'sdfopen F:\data\grads\HadISST_sst.nc'
+'sdfopen F:\data\grads\HadISST_ice.nc'
+*'set gxout fwrite'
+*'set fwrite F:\data\grads\HadISST.seasonal.1870-2016.dat'
+'d ave(maskout(sst.1,-sic.2),1,3)'
