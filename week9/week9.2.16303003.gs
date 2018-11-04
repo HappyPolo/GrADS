@@ -1,6 +1,6 @@
 'reinit'
 'sdfopen F:\data\grads\HadlSST.seasonal.1870-2016.nc'
-'enable print F:\scripts\grads\week8\week8.4.16303003.gmf'
+'enable print F:\scripts\grads\week9.4.16303003.gmf'
 'set gxout shaded'
 'set x 1'
 'set y 1'
@@ -9,18 +9,20 @@
 'set grid off'
 'set lon 0 360'
 'set lat -90 90'
-'define nino34=aave(sstwin,lon=-170,lon=-120,lat=-5,lat=5)'
-'set lon -180 180'
-'set lat -90 90'
-'set t 1'
 'colormap temp_19lev'
+'define nino34ann=ave(aave(sstwin,lon=-170,lon=-120,lat=-5,lat=5),t=111,t=146,1)'
+'modify nino34ann seasonal'
+'set t 110 146'
+'define ninoano=tloop(aave(sstwin,lon=-170,lon=-120,lat=-5,lat=5)-nino34ann)'
 *===============  ===================================
 'set lon 0 360'
 'set lat -90 90'
-'define corson = tcorr(nino34,sstaut,t=1,t = 146)'
-'define cordjf = tcorr(nino34,sstwin,t=1,t = 146)'
-'define cormam = tcorr(nino34,sstapr,t=2,t = 147)'
-*'colormap MPL_PuBu'
+'set t 111'
+'define coeson = tregr(ninoano,sstaut,time=mar1980,time=mar2016)'
+'define coedjf = tregr(ninoano,sstwin,time=mar1980,time=mar2016)'
+'define coemam = tregr(ninoano,sstapr,time=mar1981,time=mar2017)'
+
+
 *============== son =================================
 'set vpage 2 9 5.7 8.5'
 'set grads off'
@@ -28,15 +30,17 @@
 'set lat -90 90'
 'set clevs -1 -0.8 -0.6 -0.4 -0.2 0 0.2 0.4 0.6 0.8 1'
 'set ccols 14 18 20 22 24 25 26 28 30 32 34 35'
-'d corson'
-'define sigson = maskout(corson,abs(corson)-0.136)'
-'set gxout shp'
-'set shp -pt shppt'
-'d skip(sigson,2,2)'
-'draw title nino3.4_autumn'
-'set shpopts -1 3 0.005'
-'draw shp shppt'
-'set vpage off'
+'d coeson'
+'basemap L 15 0 L'
+'draw title nino3.4_ano_autumn'
+'q w2xy 190 -5'
+xlo=subwrd(result,3)
+ylo=subwrd(result,6)
+'q w2xy 240 5'
+xhi=subwrd(result,3)
+yhi=subwrd(result,6)
+'draw rec 'xlo' 'ylo' 'xhi' 'yhi
+
 *============= djf ==================================
 'set vpage 2 9 2.9 5.7'
 'set grads off'
@@ -45,33 +49,36 @@
 'set lat -90 90'
 'set clevs -1 -0.8 -0.6 -0.4 -0.2 0 0.2 0.4 0.6 0.8 1'
 'set ccols 14 18 20 22 24 25 26 28 30 32 34 35'
-'d cordjf'
-'draw title nino3.4_winter'
-'define sigdjf = maskout(cordjf,abs(cordjf)-0.136)'
-'set gxout shp'
-'set shp -pt shppt'
-'d skip(sigdjf,2,2)'
-'set shpopts -1 3 0.005'
-'draw shp shppt'
+'d coedjf'
+'basemap L 15 0 L'
+'draw title nino3.4_ano_winter'
+'q w2xy 190 -5'
+xlo=subwrd(result,3)
+ylo=subwrd(result,6)
+'q w2xy 240 5'
+xhi=subwrd(result,3)
+yhi=subwrd(result,6)
+'draw rec 'xlo' 'ylo' 'xhi' 'yhi
+
 *============= mam ===================================
 'set vpage 2 9 0.1 2.9'
 'set grads off'
 'set gxout shaded'
 'set clevs -1 -0.8 -0.6 -0.4 -0.2 0 0.2 0.4 0.6 0.8 1'
 'set ccols 14 18 20 22 24 25 26 28 30 32 34 35'
-'d cordjf'
+'d coemam'
+'basemap L 15 0 L'
 'draw title nino3.4_spring'
-'define sigmam = maskout(cormam,abs(cormam)-0.136)'
-'set gxout shp'
-'set shp -pt shppt'
-'d skip(sigmam,2,2)'
-'set shpopts -1 3 0.01'
-'draw shp shppt'
+'q w2xy 190 -5'
+xlo=subwrd(result,3)
+ylo=subwrd(result,6)
+'q w2xy 240 5'
+xhi=subwrd(result,3)
+yhi=subwrd(result,6)
+'draw rec 'xlo' 'ylo' 'xhi' 'yhi
+
 'cbarn 0.5 0 5.5 0.2'
 'set vpage off'
-
-
 'print'
 'disable print'
 *
-;
